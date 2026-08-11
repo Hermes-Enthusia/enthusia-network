@@ -2,66 +2,26 @@
 
 Monorepo for the **Enthusia SMP** server plugin ecosystem. Each plugin lives in its own git submodule with independent history — this repo pins them together and provides a unified build.
 
-## Plugins
+## Server Plugins
 
-### Core (BadgersMC)
-
-| Submodule | Description | Author |
-|-----------|-------------|--------|
+| Plugin | Description | Author |
+|--------|-------------|--------|
 | [enthusia-advancements](plugins/enthusia-advancements) | Config-driven custom advancement trees (guilds, economy, combat) | Badger |
 | [luma-guilds](plugins/luma-guilds) | Guild system — claims, vaults, ranks, relations, progression | Badger |
 | [enthusia-market](plugins/enthusia-market) | Market stall + shop system with guild integration (replaces ItemShops + ARM-Bridge) | Badger |
 | [enthusia-biomes](plugins/enthusia-biomes) | Custom biome generation via NMS (paperweight) | Badger |
 | [luma-sg](plugins/luma-sg) | Survival Games minigame | Badger |
 | [enthusia-currency](plugins/enthusia-currency) | Physical token economy with Vault integration | BadgersMC fork (p2wn) |
-
-### Server Plugins (p2wn)
-
-| Submodule | Description |
-|-----------|-------------|
-| [playtime-plugin](plugins/playtime-plugin) | Playtime tracking |
-| [mace-guard](plugins/mace-guard) | Mace combat restrictions |
-| [faster-sleep](plugins/faster-sleep) | Accelerated sleep mechanic |
-| [enthusia-teleport](plugins/enthusia-teleport) | Teleportation system |
-| [enthusia-tags](plugins/enthusia-tags) | Player tags / prefixes |
-| [enthusia-commend](plugins/enthusia-commend) | Player commendation system |
-| [diary-keeper](plugins/diary-keeper) | Player diary / journal system |
-| [warzone-duels](plugins/warzone-duels) | 1v1 duels with WarzoneRotator integration |
-
-### Donor Plugins
-
-| Submodule | Description | Author |
-|-----------|-------------|--------|
+| [playtime-plugin](plugins/playtime-plugin) | Playtime tracking | p2wn |
+| [mace-guard](plugins/mace-guard) | Mace combat restrictions | p2wn |
+| [faster-sleep](plugins/faster-sleep) | Accelerated sleep mechanic | p2wn |
+| [enthusia-teleport](plugins/enthusia-teleport) | Teleportation system | p2wn |
+| [enthusia-tags](plugins/enthusia-tags) | Player tags / prefixes | p2wn |
+| [enthusia-commend](plugins/enthusia-commend) | Player commendation system | p2wn |
+| [diary-keeper](plugins/diary-keeper) | Player diary / journal system | p2wn |
+| [warzone-duels](plugins/warzone-duels) | 1v1 duels with WarzoneRotator integration | p2wn |
 | [enthusia-donor](plugins/enthusia-donor) | Donation perks, auto-link, SQLite-backed transactions | Hermes-Enthusia fork (upstream: NotBorlyn) |
 | [enthusia-donor-npcs](plugins/enthusia-donor-npcs) | Leaderboard donor NPCs (FancyNPCs-based) | Hermes-Enthusia fork (upstream: NotBorlyn) |
-
-## Dependency Graph
-
-```
-luma-guilds (core)
-  ^
-  |--- enthusia-advancements (listens to guild events)
-  |--- enthusia-market (guild stall ownership via API)
-  |       ^
-  |       |--- enthusia-advancements (listens to market events)
-  |
-  |--- enthusia-currency (Vault economy, token items)
-          ^
-          |--- enthusia-advancements (listens to economy events)
-
-enthusia-biomes      (independent)
-luma-sg              (independent)
-playtime-plugin      (independent)
-diary-keeper         (advancement hook — DiaryListener)
-mace-guard           (independent)
-faster-sleep         (independent)
-enthusia-teleport    (independent)
-enthusia-tags        (independent)
-enthusia-commend     (advancement hook — CommendListener)
-warzone-duels        (independent)
-enthusia-donor       (independent)
-enthusia-donor-npcs  (independent)
-```
 
 ## Quick Start
 
@@ -133,22 +93,22 @@ enthusia-network/
 ├── .github/workflows/
 │   └── upstream-watch.yml  # Auto-files issues when submodule pins fall behind
 ├── plugins/
-│   ├── enthusia-advancements/   (BadgersMC)
-│   ├── luma-guilds/             (BadgersMC)
-│   ├── enthusia-market/         (BadgersMC)
-│   ├── enthusia-biomes/         (BadgersMC)
-│   ├── enthusia-currency/       (BadgersMC fork)
-│   ├── luma-sg/                 (BadgersMC)
-│   ├── playtime-plugin/         (p2wn)
-│   ├── mace-guard/              (p2wn)
-│   ├── faster-sleep/            (p2wn)
-│   ├── enthusia-teleport/       (p2wn)
-│   ├── enthusia-tags/           (p2wn)
-│   ├── enthusia-commend/        (p2wn)
-│   ├── diary-keeper/            (p2wn)
-│   ├── warzone-duels/           (p2wn)
-│   ├── enthia-donor/            (Hermes-Enthusia fork)
-│   └── enthia-donor-npcs/       (Hermes-Enthusia fork)
+│   ├── enthusia-advancements/
+│   ├── luma-guilds/
+│   ├── enthusia-market/
+│   ├── enthusia-biomes/
+│   ├── enthusia-currency/
+│   ├── luma-sg/
+│   ├── playtime-plugin/
+│   ├── mace-guard/
+│   ├── faster-sleep/
+│   ├── enthusia-teleport/
+│   ├── enthusia-tags/
+│   ├── enthusia-commend/
+│   ├── diary-keeper/
+│   ├── warzone-duels/
+│   ├── enthia-donor/
+│   └── enthia-donor-npcs/
 └── scripts/
     ├── build-all.sh / .bat  # Build everything
     └── deploy.sh            # Copy JARs to server
